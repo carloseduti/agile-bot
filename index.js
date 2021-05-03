@@ -1,5 +1,5 @@
 const TelegramBot = require('node-telegram-bot-api');
-const dialogflow = require('./dialogflow');
+const dialogflow = require('./service/dialogflow');
 
 const token = '1785982362:AAF5vRdDrojxKZZedQaLIh2jNlqNZuJijv8';
 

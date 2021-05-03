@@ -1,5 +1,5 @@
 const dialogflow = require('dialogflow');
-const configs = require('./agile-bot.json');
+const configs = require('../keys/agile-bot.json');
 
 const sessionClient = new dialogflow.SessionsClient({
     projectId: configs.project_id,
