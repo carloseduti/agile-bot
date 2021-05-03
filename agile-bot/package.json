@@ -1,0 +1,15 @@
+{
+  "name": "agilebot",
+  "version": "1.0.0",
+  "description": "bot tcc",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "wanderson e carlos",
+  "license": "ISC",
+  "dependencies": {
+    "dialogflow": "^1.2.0",
+    "node-telegram-bot-api": "^0.53.0"
+  }
+}
