@@ -1,15 +1,10 @@
 const moongose = require('mongoose');
+const Schema = moongose.Schema;
 
-const aluno = new moongose.Schema({
-    nome:{
-        type: String
-    },
-    matricula:{
-         type: String
-     },
-    email:{
-        type: String
-    } 
+const AlunoSchema = new Schema({
+    nome: String,
+    email: String,
+    matricula: String
 });
 
-module.exports = Aluno = moongose.model('aluno', aluno);
+module.exports = moongose.model('Aluno', AlunoSchema)

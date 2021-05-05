@@ -4,16 +4,13 @@ const AlunoController = require('./app/controllers/alunoController');
 const cors = require('cors');
 
 routes.use(cors());
-
 BotController.index();
 
 //Rotas
 //Aluno Controller
-routes.get('/aluno/index', AlunoController.index);
-routes.post('/aluno/create', AlunoController.create);
-
-
-
-
+routes.get('/aluno/:aluno_id', AlunoController.findAlunoById)
+routes.get('/aluno', AlunoController.findAll);
+routes.post('/aluno/create', AlunoController.createAluno);
+routes.delete('/aluno/:aluno_id', AlunoController.deleteAlunoById)
 
 module.exports = routes;

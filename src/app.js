@@ -1,6 +1,6 @@
 const express = require('express');
 const connectDB = require('./database/connection');
-
+const bodyParser = require('body-parser');
 
 class AppController {
     constructor() {
@@ -11,6 +11,7 @@ class AppController {
 
     middlewares() {
         this.express.use(express.json());
+        this.express.use(express.urlencoded({ extended: true}))
     }
     routes() {
         this.express.use(require('./routes.js'));
