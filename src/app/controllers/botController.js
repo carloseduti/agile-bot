@@ -1,5 +1,7 @@
 const TelegramBot = require('node-telegram-bot-api');
 const dialogflow = require('../services/dialogFlowService');
+const alunoService = require('../services/alunoService');
+const Aluno = require('../models/Aluno');
 
 class BotController {
     async index() {
@@ -21,6 +23,10 @@ class BotController {
                 // Texto a partir da resposta do dialogflow.
                 let responseText = dfResponse.text;
 
+                if (msg.text == 'pedro') {
+                    const resultado = (await new alunoService().findAluno('6092db95a50f603c08c9963d')).toObject()
+                }
+
                 // Envio da mensagem para o usuário do Telegram.
                 bot.sendMessage(chatId, responseText);
             });
@@ -30,7 +36,7 @@ class BotController {
         }
     }
 
-    async store(){
+    async store() {
 
     }
 }
