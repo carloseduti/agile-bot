@@ -51,6 +51,7 @@ class AlunoController {
             return res.status(500).json({ messagem: "Erro ao encontrar aluno" + '' + error})
         }
     }
+
 }
 
 module.exports = new AlunoController();

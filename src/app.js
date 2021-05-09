@@ -1,6 +1,5 @@
 const express = require('express');
 const connectDB = require('./database/connection');
-const bodyParser = require('body-parser');
 
 class AppController {
     constructor() {

@@ -1,5 +1,6 @@
 const mongoose = require('mongoose')
-const URI = 'mongodb+srv://root:senha_da_nasa@agilebot.22g61.mongodb.net/db02?retryWrites=true&w=majority'
+
+const URI = process.env.MONGODB_URI;
 
 const connectDB = async () =>{
     await mongoose.connect(URI,{

@@ -1,14 +1,14 @@
 const TelegramBot = require('node-telegram-bot-api');
 const dialogflow = require('../services/dialogFlowService');
 const alunoService = require('../services/alunoService');
-const Aluno = require('../models/Aluno');
 
 class BotController {
     async index() {
       
         try {
 
-            const token = '1785982362:AAF5vRdDrojxKZZedQaLIh2jNlqNZuJijv8';
+            const token = process.env.TELEGRAM_TOKEN;
+            
             const bot = new TelegramBot(token, { polling: true });
 
             bot.on('message', async (msg) => {
