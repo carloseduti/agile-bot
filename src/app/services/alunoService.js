@@ -3,7 +3,7 @@ const Aluno = require('../models/Aluno');
 
 class AlunoServices {
 
-    async findAluno(id) {
+    async findAlunoById(id) {
         try {
             const resultado = await Aluno.findById(id)
             return resultado
@@ -37,8 +37,17 @@ class AlunoServices {
             const resultado = await Aluno.findByIdAndDelete(id)
             return resultado;
         } catch (error) {
-            console.log(error)
             throw new Error("Erro ao deletar aluno", error)
+        }
+    }
+
+    async findAlunoByMatricula(matricula){
+        try {
+            const query ={matricula : matricula};
+            const resultado = await Aluno.findOne(query)
+            return resultado;
+        } catch (error) {
+            throw new Error("Erro ao encontrar aluno", error)
         }
     }
 

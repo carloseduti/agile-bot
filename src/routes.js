@@ -8,7 +8,8 @@ BotController.index();
 
 //Rotas
 //Aluno Controller
-routes.get('/aluno/:id', AlunoController.findAlunoById)
+routes.get('/aluno/:id', AlunoController.findAlunoById);
+routes.get('/aluno/matricula/:matricula', AlunoController.findAlunoByMatricula);
 routes.get('/aluno', AlunoController.findAll);
 routes.post('/aluno/create', AlunoController.createAluno);
 routes.delete('/aluno/:id', AlunoController.deleteAlunoById)
