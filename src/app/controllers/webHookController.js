@@ -13,7 +13,7 @@ class WebHookController {
                     console.log(resultado.nome)
                 }
                 let textResponse = "legal"
-                const response = this.createTextResponse(textResponse)
+                const response = await this.createTextResponse(textResponse)
 
                 res.send(response);
             }
@@ -23,7 +23,7 @@ class WebHookController {
         }
     }
 
-    createTextResponse(textResponse) {
+    async createTextResponse(textResponse) {
         let response = {
             "fulfillmentText": "This is a text response",
             "fulfillmentMessages": [
