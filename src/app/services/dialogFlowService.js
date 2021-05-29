@@ -1,36 +1,63 @@
 const dialogflow = require('dialogflow');
 const configs = require('../../config/agile-bot.json');
 
-const sessionClient = new dialogflow.SessionsClient({
-    projectId: configs.project_id,
-    credentials: {
-        private_key: configs.private_key,
-        client_email: configs.client_email
-    }
-});
+class DialogService {
 
-async function sendMessage(chatId, message) {
-    const sessionPath = sessionClient.sessionPath(configs.project_id, chatId);
-    
-    const request = {
-        session: sessionPath,
-        queryInput: {
-            text: {
-                text: message,
-                languageCode: 'pt-br'
+    async sendMessage(chatId, message) {
+        const sessionClient = new dialogflow.SessionsClient({
+            projectId: configs.project_id,
+            credentials: {
+                private_key: configs.private_key,
+                client_email: configs.client_email
+            }
+        });
+
+        const sessionPath = sessionClient.sessionPath(configs.project_id, chatId);
+        const request = {
+            session: sessionPath,
+            queryInput: {
+                text: {
+                    text: message,
+                    languageCode: 'pt-br'
+                }
             }
         }
-    }
+        const response = await sessionClient.detectIntent(request);
 
-    const response = await sessionClient.detectIntent(request);
-    const result = response[0].queryResult;
-    
-    // Retornando o objeto para ser utilizado no arquivo index.js.
-    return { 
-        text: result.fulfillmentText, 
-        intent: result.intent.displayName, 
-        fields: result.parameters.fields 
+        console.log("resultado ->", response[0].queryResult.outputContexts)
+        const result = response[0].queryResult;
+
+        return {
+            text: result.fulfillmentText,
+            intent: result.intent.displayName,
+            fields: result.parameters.fields,
+        };
+
     };
-};
 
-module.exports.sendMessage = sendMessage;
+    // async atualizarContexto(context) {
+    //     const sessionClient = new dialogflow.SessionsClient({
+    //         projectId: configs.project_id,
+    //         credentials: {
+    //             private_key: configs.private_key,
+    //             client_email: configs.client_email
+    //         }
+    //     });
+
+    //     const sessionPath = sessionClient.sessionPath(configs.project_id, chatId);
+        
+    //    await sessionClient.updateContext({ context: context })
+    //         .then(responses => {
+    //             const response = responses[0];
+    //             console.log("update context", response)
+    //             return response;
+    //         })
+    //         .catch(err => {
+    //             console.error(err);
+    //         });
+    // }
+
+}
+
+
+module.exports = new DialogService();
