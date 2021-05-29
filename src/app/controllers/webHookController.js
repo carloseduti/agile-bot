@@ -6,64 +6,124 @@ class WebHookController {
         try {
             console.log(req.body)
             const intent = req.body?.queryResult.intent.displayName;
-            if (intent === 'boasvindas') {
+            if (intent == 'boasvindas') {
                 let matricula = req.body.queryResult.parameters["matricula"];
                 const resultado = await new alunoService().findAlunoByMatricula(matricula);
                 if (resultado) {
-                    console.log(resultado.nome)
-                }
-                let textResponse = "legal"
-                const response = await this.createTextResponse(textResponse)
+                    let textResponse = `Prezado ${resultado?.nome}, seus dados foram localizados, deseja prosseguir com o atendimento?`
+                    let context = 'matriculaEncontrada'
+                    let response = {
+                        "fulfillmentMessages": [
+                            {
+                                "text": {
+                                    "text": [
+                                        textResponse
+                                    ]
+                                }
+                            }
+                        ],
+                        "outputContexts": [
+                            {
+                                "name": `projects/agile-bot-ekqw/agent/sessions/a83532e4-c296-f6f3-0dd8-105c12298ac4/contexts/${context}`,
+                                "lifespanCount": 5,
+                                "parameters": {
+                                    "param-name": `${context}`
+                                }
+                            }
+                        ]
+                    }
 
-                res.send(response);
+                    res.send(response);
+                    return;
+                } else {
+                    let textResponse = `Sua matricula não foi encontrada em nosso sistema, insira novamente sua matrícula para prosseguirmos!`
+                    let context = "matriculaNaoEncontrada"
+
+                    let response = {
+                        "fulfillmentMessages": [
+                            {
+                                "text": {
+                                    "text": [
+                                        textResponse
+                                    ]
+                                }
+                            }
+                        ],
+                        "outputContexts": [
+                            {
+                                "name": `projects/agile-bot-ekqw/agent/sessions/a83532e4-c296-f6f3-0dd8-105c12298ac4/contexts/${context}`,
+                                "lifespanCount": 5,
+                                "parameters": {
+                                    "param-name": `${context}`
+                                }
+                            }
+                        ]
+                    }
+
+                    res.send(response);
+                    return;
+                }
+            } else if (intent =='matricula_nao_encontrada'){
+                let matricula = req.body.queryResult.parameters["matricula"];
+                const resultado = await new alunoService().findAlunoByMatricula(matricula);
+                if(resultado){
+                    let textResponse = `Pronto, finalmente achamos sua matricula ${resultado?.nome}, deseja prosseguir?`
+                    let context = "matriculaEncontrada"
+                    let response = {
+                        "fulfillmentMessages": [
+                            {
+                                "text": {
+                                    "text": [
+                                        textResponse
+                                    ]
+                                }
+                            }
+                        ],
+                        "outputContexts": [
+                            {
+                                "name": `projects/agile-bot-ekqw/agent/sessions/a83532e4-c296-f6f3-0dd8-105c12298ac4/contexts/${context}`,
+                                "lifespanCount": 5,
+                                "parameters": {
+                                    "param-name": `${context}`
+                                }
+                            }
+                        ]
+                    }
+
+                    res.send(response);
+                    return;
+                }else {
+                    let textResponse = "Infelizmente não achamos seus dados, entre em contato com a Central de Atendimento da Universidade X"
+                    let context = "tchau"
+                    let response = {
+                        "fulfillmentMessages": [
+                            {
+                                "text": {
+                                    "text": [
+                                        textResponse
+                                    ]
+                                }
+                            }
+                        ],
+                        "outputContexts": [
+                            {
+                                "name": `projects/agile-bot-ekqw/agent/sessions/a83532e4-c296-f6f3-0dd8-105c12298ac4/contexts/${context}`,
+                                "lifespanCount": 5,
+                                "parameters": {
+                                    "param-name": `${context}`
+                                }
+                            }
+                        ]
+                    }
+
+                    res.send(response);
+                    return;
+                }
             }
             return res.status(200).json({ message: req });
         } catch (error) {
             console.log(error)
         }
     }
-
-    async createTextResponse(textResponse) {
-        let response = {
-            "fulfillmentText": "This is a text response",
-            "fulfillmentMessages": [
-                {
-                    "text": {
-                        "text": [
-                            textResponse
-                        ]
-                    }
-                }
-            ],
-        }
-
-        return response
-    }
-
-    // createResponseWithContext(textResponse, context) {
-    //     let response = {
-    //         "fulfillmentMessages": [
-    //             {
-    //                 "text": {
-    //                     "text": [
-    //                         textResponse
-    //                     ]
-    //                 }
-    //             }
-    //         ],
-    //         "outputContexts": [
-    //             {
-    //                 "name": "projects/project-id/agent/sessions/session-id/contexts/context-name",
-    //                 "lifespanCount": 5,
-    //                 "parameters": {
-    //                     "param-name": "param-value"
-    //                 }
-    //             }
-    //         ]
-    //     }
-
-    //     return response;
-    // }
-
 }
 module.exports = new WebHookController();
