@@ -16,6 +16,6 @@ routes.post('/aluno/create', AlunoController.createAluno);
 routes.delete('/aluno/:id', AlunoController.deleteAlunoById);
 
 // WebHook
-routes.post('/webhook', WebHookController.receive);
+// routes.post('/webhook', WebHookController.receive);
 
 module.exports = routes;
