@@ -1,6 +1,5 @@
 const Aluno = require('../models/Aluno');
 
-
 class AlunoServices {
 
     async findAlunoById(id) {
