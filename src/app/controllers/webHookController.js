@@ -13,21 +13,12 @@ class WebHookController {
       if (aluno) {
         const textResponse = `Prezado ${aluno?.nome}, seus dados foram localizados, deseja prosseguir com o atendimento?`;
         const context = 'matricula_encontrada_context';
-        const resultado = await new webHookService().createTextResponse(
-          textResponse,
-          context,
-          session
-        );
+        const resultado = await new webHookService().createTextResponse(textResponse, context, session);
         res.send(resultado);
       } else {
-        const textResponse =
-          'Infelizmente não encontramos sua matricula em nossa base de dados para continuar, escolha uma das opções: \n 1 - Tentar novamente \n 2 - Finalizar atendimento';
+        const textResponse ='Infelizmente não encontramos sua matricula em nossa base de dados para continuar, escolha uma das opções: \n 1 - Tentar novamente \n 2 - Finalizar atendimento';
         const context = 'tentar_novamente_context';
-        const resultado = await new webHookService().createTextResponse(
-          textResponse,
-          context,
-          session
-        );
+        const resultado = await new webHookService().createTextResponse(textResponse, context, session);
         res.send(resultado);
       }
     } else if (intent == 'tentar_novamente') {
@@ -36,21 +27,12 @@ class WebHookController {
       if (aluno) {
         const textResponse = `Prezado ${aluno?.nome}, agora sim seus dados foram localizados, deseja prosseguir com o atendimento?`;
         const context = 'matricula_encontrada_context';
-        const resultado = await new webHookService().createTextResponse(
-          textResponse,
-          context,
-          session
-        );
+        const resultado = await new webHookService().createTextResponse(textResponse, context, session);
         res.send(resultado);
       } else {
-        const textResponse =
-          'Infelizmente não encontramos sua matricula em nossa base de dados para continuar, escolha uma das opções: \n 1 - Tentar novamente \n 2 - Finalizar atendimento';
+        const textResponse = 'Infelizmente não encontramos sua matricula em nossa base de dados para continuar, escolha uma das opções: \n 1 - Tentar novamente \n 2 - Finalizar atendimento';
         const context = 'tentar_novamente_context';
-        const resultado = await new webHookService().createTextResponse(
-          textResponse,
-          context,
-          session
-        );
+        const resultado = await new webHookService().createTextResponse(textResponse, context, session);
         res.send(resultado);
       }
     }
