@@ -31,7 +31,7 @@ class AlunoServices {
 
     }
 
-    async deleteAluno(id){
+    async deleteAluno(id) {
         try {
             const resultado = await Aluno.findByIdAndDelete(id)
             return resultado;
@@ -40,16 +40,15 @@ class AlunoServices {
         }
     }
 
-    async findAlunoByMatricula(matricula){
+    async findAlunoByMatricula(matricula) {
         try {
-            const query ={matricula : matricula};
+            const query = { matricula: matricula };
             const resultado = await Aluno.findOne(query)
             return resultado;
         } catch (error) {
             throw new Error("Erro ao encontrar aluno", error)
         }
     }
-
 }
 
 module.exports = AlunoServices;
