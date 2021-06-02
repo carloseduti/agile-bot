@@ -1,17 +1,18 @@
 const TelegramBot = require('node-telegram-bot-api');
 const alunoService = require('../services/alunoService');
 const webHookService = require('../services/webHookService');
+const emailService = require ('../services/emailService');
 
 class WebHookController {
   async webhook(req, res) {
     console.log('teste');
-    const intent = req.body?.queryResult.intent.displayName;
-    const session = req.body?.session;
+    const intent = req.body.queryResult.intent.displayName;
+    const session = req.body.session;
     if (intent == 'valida_matricula') {
       const { matricula } = req.body.queryResult.parameters;
       const aluno = await new alunoService().findAlunoByMatricula(matricula);
       if (aluno) {
-        const textResponse = `Prezado ${aluno?.nome}, seus dados foram localizados, deseja prosseguir com o atendimento?`;
+        const textResponse = `Prezado ${aluno.nome}, seus dados foram localizados, deseja prosseguir com o atendimento?`;
         const context = 'matricula_encontrada_context';
         const resultado = await new webHookService().createTextResponse(textResponse, context, session);
         res.send(resultado);
@@ -25,7 +26,7 @@ class WebHookController {
       const { matricula } = req.body.queryResult.parameters;
       const aluno = await new alunoService().findAlunoByMatricula(matricula);
       if (aluno) {
-        const textResponse = `Prezado ${aluno?.nome}, agora sim seus dados foram localizados, deseja prosseguir com o atendimento?`;
+        const textResponse = `Prezado ${aluno.nome}, agora sim seus dados foram localizados, deseja prosseguir com o atendimento?`;
         const context = 'matricula_encontrada_context';
         const resultado = await new webHookService().createTextResponse(textResponse, context, session);
         res.send(resultado);
@@ -37,17 +38,15 @@ class WebHookController {
       }
     } else if (intent == 'declaracao') {
       const { matricula } = req.body.queryResult.parameters;
-      if (matricula) {
-        const aluno = await new alunoService().findAlunoByMatricula(matricula);
+      console.log("chegou no if da dalcaração")
+      const aluno = await new alunoService().findAlunoByMatricula('12345');
         if (aluno) {
-          const textResponse = `Entendido, foi enviado um email para: ${aluno?.email}`
+          const textResponse = `Entendido, foi enviado um email para: ${aluno.email}`
           const context = 'tentar_novamente_context';
           const resultado = await new webHookService().createTextResponse(textResponse, context, session);
-          
+          await new emailService().enviarEmail(aluno.email, aluno.nome)
           res.send(resultado);
         }
-      }
-
     }
   }
 }
