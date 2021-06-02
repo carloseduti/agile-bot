@@ -51,4 +51,4 @@ class AlunoService {
     }
 }
 
-module.exports = AlunoServices;
+module.exports = AlunoService;
