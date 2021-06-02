@@ -16,7 +16,7 @@ class WebHookController {
         const resultado = await new webHookService().createTextResponse(textResponse, context, session);
         res.send(resultado);
       } else {
-        const textResponse ='Infelizmente não encontramos sua matricula em nossa base de dados para continuar, escolha uma das opções: \n 1 - Tentar novamente \n 2 - Finalizar atendimento';
+        const textResponse = 'Infelizmente não encontramos sua matricula em nossa base de dados para continuar, escolha uma das opções: \n 1 - Tentar novamente \n 2 - Finalizar atendimento';
         const context = 'tentar_novamente_context';
         const resultado = await new webHookService().createTextResponse(textResponse, context, session);
         res.send(resultado);
@@ -35,6 +35,19 @@ class WebHookController {
         const resultado = await new webHookService().createTextResponse(textResponse, context, session);
         res.send(resultado);
       }
+    } else if (intent == 'declaracao') {
+      const { matricula } = req.body.queryResult.parameters;
+      if (matricula) {
+        const aluno = await new alunoService().findAlunoByMatricula(matricula);
+        if (aluno) {
+          const textResponse = `Entendido, foi enviado um email para: ${aluno?.email}`
+          const context = 'tentar_novamente_context';
+          const resultado = await new webHookService().createTextResponse(textResponse, context, session);
+          
+          res.send(resultado);
+        }
+      }
+
     }
   }
 }
