@@ -1,6 +1,6 @@
 module.exports ={
      host: "smtp.gmail.com",
      port:  587,
-     user:  "agiletelegram@gmail.com",
-     pass:  "agilebot123"
+     user: process.env.USER,
+     pass:  process.env.PASS
 }

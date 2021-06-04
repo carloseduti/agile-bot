@@ -1,11 +1,17 @@
 const TelegramBot = require('node-telegram-bot-api');
 const alunoService = require('../services/alunoService');
 const webHookService = require('../services/webHookService');
-const emailService = require ('../services/emailService');
+const emailService = require('../services/emailService');
+const tipoAtendimento = require('../utils/tipoAtendimento');
 
 class WebHookController {
+
+  async saveALuno(aluno){
+    const resultado = aluno
+    return resultado;
+  }
+
   async webhook(req, res) {
-    console.log('teste');
     const intent = req.body.queryResult.intent.displayName;
     const session = req.body.session;
     if (intent == 'valida_matricula') {
@@ -13,13 +19,11 @@ class WebHookController {
       const aluno = await new alunoService().findAlunoByMatricula(matricula);
       if (aluno) {
         const textResponse = `Prezado ${aluno.nome}, seus dados foram localizados, deseja prosseguir com o atendimento?`;
-        const context = 'matricula_encontrada_context';
-        const resultado = await new webHookService().createTextResponse(textResponse, context, session);
+        const resultado = await new webHookService().createTextResponse(textResponse, 'matricula_encontrada_context', session);
         res.send(resultado);
       } else {
         const textResponse = 'Infelizmente não encontramos sua matricula em nossa base de dados para continuar, escolha uma das opções: \n 1 - Tentar novamente \n 2 - Finalizar atendimento';
-        const context = 'tentar_novamente_context';
-        const resultado = await new webHookService().createTextResponse(textResponse, context, session);
+        const resultado = await new webHookService().createTextResponse(textResponse, 'tentar_novamente_context', session);
         res.send(resultado);
       }
     } else if (intent == 'tentar_novamente') {
@@ -27,26 +31,21 @@ class WebHookController {
       const aluno = await new alunoService().findAlunoByMatricula(matricula);
       if (aluno) {
         const textResponse = `Prezado ${aluno.nome}, agora sim seus dados foram localizados, deseja prosseguir com o atendimento?`;
-        const context = 'matricula_encontrada_context';
-        const resultado = await new webHookService().createTextResponse(textResponse, context, session);
+        const resultado = await new webHookService().createTextResponse(textResponse, 'matricula_encontrada_context', session);
         res.send(resultado);
       } else {
         const textResponse = 'Infelizmente não encontramos sua matricula em nossa base de dados para continuar, escolha uma das opções: \n 1 - Tentar novamente \n 2 - Finalizar atendimento';
-        const context = 'tentar_novamente_context';
-        const resultado = await new webHookService().createTextResponse(textResponse, context, session);
+        const resultado = await new webHookService().createTextResponse(textResponse, 'tentar_novamente_context', session);
         res.send(resultado);
       }
     } else if (intent == 'declaracao') {
-      const { matricula } = req.body.queryResult.parameters;
-      console.log("chegou no if da dalcaração")
       const aluno = await new alunoService().findAlunoByMatricula('12345');
-        if (aluno) {
-          const textResponse = `Entendido, foi enviado um email para: ${aluno.email}`
-          const context = 'tentar_novamente_context';
-          const resultado = await new webHookService().createTextResponse(textResponse, context, session);
-          await new emailService().enviarEmail(aluno.email, aluno.nome)
-          res.send(resultado);
-        }
+      if (aluno) {
+        const textResponse = `Entendido, foi enviado um email para: ${aluno.email}`
+        const resultado = await new webHookService().createTextResponse(textResponse, 'tentar_novamente_context', session);
+        await new emailService().enviarEmail(aluno, tipoAtendimento.DECLARACAO)
+        res.send(resultado);
+      }
     }
   }
 }
