@@ -9,7 +9,8 @@ class SecretariaService {
     async enviarDocumentoPorTipo(aluno, tipo) {
         try {
             if(tipo == tipoAtendimento.DECLARACAO){
-                const conteudo = `Prezado, ${aluno.nome} \n Segue em anexo a declaração escolar conforme solicitado. \n Att, AgileBot`
+                const conteudo = await new documentoService().conteudoEmailDeclaracao(aluno)
+                console.log(conteudo)
                 const assunto = `Declaração - ${aluno.nome} - ${aluno.matricula}`
                 const email = aluno.email;
                 await new gerarEmailService().gerarPdfByTipo(aluno, tipo);

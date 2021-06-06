@@ -40,6 +40,14 @@ class DocumentoService {
          `;
         return conteudo;
     }
+
+    async conteudoEmailDeclaracao(aluno) {
+        const conteudo = ` 
+        <h1> teste de email com conteudo html</h1>
+       `;
+        return conteudo;
+    }
+
     
 }
 

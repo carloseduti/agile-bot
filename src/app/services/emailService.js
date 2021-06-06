@@ -19,8 +19,9 @@ const transporter = nodemailer.createTransport({
 class EmailService {
 
     async send(conteudo, assunto, email, matricula , path) {
+        console.log("Entrou no send do email ")
         const mailSent = await transporter.sendMail({
-            text: conteudo,
+            text: "Texto TextDecoderStream",
             subject: assunto,
             from: `AgileBot <agiletelegram@gmail.com>`,
             to: [email],
@@ -28,8 +29,11 @@ class EmailService {
                 filename: `declaracao-${matricula}.pdf`, 
                 path: `${path}-${matricula}.pdf`,
                 contentType: 'application/pdf' 
-              }]
+              }],
+            html: conteudo 
+        
         });
+        console.log("Entrou no send do email ******************** -> ", conteudo)
         console.log(mailSent)
     }
 
