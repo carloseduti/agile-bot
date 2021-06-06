@@ -25,6 +25,7 @@ class AlunoController {
 
     async createAluno(req, res) {
         try {
+            console.log(req.body)
             const resultado = await new AlunoServices().createAluno(req.body);
             return res.status(200).json({ message: resultado })
         } catch (error) {

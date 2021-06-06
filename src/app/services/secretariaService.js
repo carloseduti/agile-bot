@@ -2,6 +2,7 @@ const gerarEmailService = require('./gerarPdfService')
 const tipoAtendimento = require('../utils/tipoAtendimento');
 const emailService = require('../services/emailService')
 const pathAtendimento = require('../utils/pathAtendimentos')
+const documentoService = require('../services/documentoService')
 
 class SecretariaService {
 
@@ -14,7 +15,6 @@ class SecretariaService {
                 await new gerarEmailService().gerarPdfByTipo(aluno, tipo);
                 await new emailService().send(conteudo, assunto, email, aluno.matricula, pathAtendimento.PATH_DECLARACAO);
             }
-            
         } catch (error) {
             throw new Error("Erro ao enviar email", error)
         }
