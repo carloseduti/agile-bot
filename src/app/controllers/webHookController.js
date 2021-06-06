@@ -16,6 +16,7 @@ class WebHookController {
     const session = req.body.session;
     if (intent == 'valida_matricula') {
       const { matricula } = req.body.queryResult.parameters;
+      console.log("matricula -- >", matricula)
       const aluno = await new alunoService().findAlunoByMatricula(matricula);
       if (aluno) {
         const textResponse = `Prezado ${aluno.nome}, seus dados foram localizados, deseja prosseguir com o atendimento?`;

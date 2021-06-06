@@ -21,7 +21,6 @@ class EmailService {
     async send(conteudo, assunto, email, matricula , path) {
         console.log("Entrou no send do email ")
         const mailSent = await transporter.sendMail({
-            text: "Texto TextDecoderStream",
             subject: assunto,
             from: `AgileBot <agiletelegram@gmail.com>`,
             to: [email],
