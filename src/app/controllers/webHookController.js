@@ -1,12 +1,12 @@
-const TelegramBot = require('node-telegram-bot-api');
 const alunoService = require('../services/alunoService');
 const webHookService = require('../services/webHookService');
 const emailService = require('../services/emailService');
 const tipoAtendimento = require('../utils/tipoAtendimento');
+const secretariaService = require('../services/secretariaService');
 
 class WebHookController {
 
-  async saveALuno(aluno){
+  async saveALuno(aluno) {
     const resultado = aluno
     return resultado;
   }
@@ -43,7 +43,7 @@ class WebHookController {
       if (aluno) {
         const textResponse = `Entendido, foi enviado um email para: ${aluno.email}`
         const resultado = await new webHookService().createTextResponse(textResponse, 'tentar_novamente_context', session);
-        await new emailService().enviarEmail(aluno, tipoAtendimento.DECLARACAO)
+        await new secretariaService().enviarDocumentoPorTipo(aluno, tipoAtendimento.DECLARACAO)
         res.send(resultado);
       }
     }
