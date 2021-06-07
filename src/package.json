@@ -14,10 +14,11 @@
     "cors": "^2.8.5",
     "dialogflow": "^1.2.0",
     "dialogflow-fulfillment": "^0.6.1",
-    "dotenv": "^9.0.1",
+    "dotenv": "^9.0.2",
     "express": "^4.17.1",
     "html-pdf": "^3.0.1",
-    "mongoose": "^5.12.7",
-    "node-telegram-bot-api": "^0.53.0"
+    "mongoose": "^5.12.13",
+    "node-telegram-bot-api": "^0.53.0",
+    "nodemailer": "^6.6.1"
   }
 }
