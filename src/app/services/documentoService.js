@@ -64,7 +64,7 @@ class DocumentoService {
                     </p>
             </div>
             <div style="text-align: center; margin-bottom: 100px;">
-                    <h4 style="background-color: rgba(35, 38, 216, 0.808);color: antiquewhite; height: 60px; line-height: 50px; border-radius: 5px"> Agile Bot® - 2021 Carlos Eduardo & Wanderson Rafael</h4>
+                    <h4 style="background-color: rgba(12, 9, 9, 0.808);color: antiquewhite; height: 60px; line-height: 50px; border-radius: 5px"> Agile Bot® - 2021 Carlos Eduardo & Wanderson Rafael</h4>
             </div>
         </div>
        `;
