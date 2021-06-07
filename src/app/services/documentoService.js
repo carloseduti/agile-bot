@@ -43,7 +43,7 @@ class DocumentoService {
     async conteudoEmailDeclaracao(aluno) {
         const conteudo = ` 
         <div style="margin: 0 auto; width: 50%;">
-            <div style="text-align: center; background-color: rgba(12, 9, 9, 0.808); color: antiquewhite; height: 120px; line-height: 8px; border-radius: 5px">
+            <div style="text-align: center; background-color: rgba(35, 38, 216, 0.808); color: antiquewhite; height: 120px; line-height: 8px; border-radius: 5px">
                     <img style="width: 60px; height: 6opx; margin-top: 10px;" src="https://static.crozdesk.com/web_app_library/providers/logos/000/003/155/original/chatbots-builder-1559230712-logo.png?1559230712">
                     <h1 style="text-shadow: rgb(119, 116, 116) 0.1em 0.1em 0.2em"> Atendimento academico unidesc </h1>
                     
@@ -64,7 +64,7 @@ class DocumentoService {
                     </p>
             </div>
             <div style="text-align: center; margin-bottom: 100px;">
-                    <h4 style="background-color: rgba(12, 9, 9, 0.808);color: antiquewhite; height: 60px; line-height: 50px; border-radius: 5px"> Agile Bot® - 2021 Carlos Eduardo & Wanderson Rafael</h4>
+                    <h4 style="background-color: rgba(35, 38, 216, 0.808);color: antiquewhite; height: 60px; line-height: 50px; border-radius: 5px"> Agile Bot® - 2021 Carlos Eduardo & Wanderson Rafael</h4>
             </div>
         </div>
        `;
