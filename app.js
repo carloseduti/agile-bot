@@ -1,5 +1,5 @@
 const express = require('express');
-const connectDB = require('./database/connection');
+const connectDB = require('./src/database/connection');
 
 class AppController {
     constructor() {
@@ -12,7 +12,7 @@ class AppController {
         this.express.use(express.json());
     }
     routes() {
-        this.express.use(require('./routes.js'));
+        this.express.use(require('./src/routes'));
     }
 }
 
