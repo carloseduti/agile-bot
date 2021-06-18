@@ -8,6 +8,8 @@ class WebHookController {
 
   async webhook(req, res) {
 
+    console.log(req.body)
+
     const intent = req.body.queryResult.intent.displayName;
     const session = req.body.session;
     const { matricula } = req.body.queryResult.parameters;
@@ -36,7 +38,7 @@ class WebHookController {
     } else if (intent == 'declaracao') {
       if (aluno) {
         const textResponse = `Entendido, foi enviado um email para: ${aluno.email}, Deseja algo mais? \n\nDigite "Opções" para menu ou "Sair" caso deseje finalizar o atendimento!`
-        const resultado = await new webHookService().createTextResponse(textResponse, '', session);
+        const resultado = await new webHookService().createTextResponse(textResponse, 'tentar_novamente_context', session);
         await new secretariaService().enviarDocumentoPorTipo(aluno, tipoAtendimento.DECLARACAO)
         res.send(resultado);
       }
