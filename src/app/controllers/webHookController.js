@@ -2,13 +2,13 @@ const alunoService = require('../services/alunoService');
 const webHookService = require('../services/webHookService');
 const emailService = require('../services/emailService');
 const tipoAtendimento = require('../utils/tipoAtendimento');
-const secretariaService = require('../services/secretariaService');
+const documentoService = require('../services/documentoService')
+const gerarPdfService = require('../services/gerarPdfService')
+const pathAtendimento = require('../utils/pathAtendimentos')
 
 class WebHookController {
 
   async webhook(req, res) {
-
-    console.log(req.body)
 
     const intent = req.body.queryResult.intent.displayName;
     const session = req.body.session;
@@ -37,9 +37,16 @@ class WebHookController {
       }
     } else if (intent == 'declaracao') {
       if (aluno) {
+       const pdf = await new gerarPdfService().gerarPdfByTipo(aluno,tipoAtendimento.DECLARACAO)
+      }
+    } else if(intent == 'confirma_declaracao'){
+      if(aluno){
+        console.log('aluno', aluno)
         const textResponse = `Prezado(a) ${aluno.nome}, \nConforme solicitado foi enviado uma declaração para o email ${aluno.email}. \n\n Para solicitar outro serviço digite "Solicitar" ou "Sair" caso deseje finalizar o atendimento!`
-        const resultado = await new webHookService().createTextResponse(textResponse, 'matricula_encontrada_context', session);
-        await new secretariaService().enviarDocumentoPorTipo(aluno, tipoAtendimento.DECLARACAO)
+        const assunto = `Declaração - ${aluno.nome}`
+        const conteudo = await new documentoService().conteudoEmailDeclaracao(aluno)
+        await new emailService().send(conteudo, assunto, aluno, pathAtendimento.PATH_DECLARACAO);
+        const resultado = await new webHookService().createTextResponse(textResponse, 'valida_matricula_context', session);
         res.send(resultado);
       }
     }
