@@ -37,8 +37,8 @@ class WebHookController {
       }
     } else if (intent == 'declaracao') {
       if (aluno) {
-        const textResponse = `Entendido, foi enviado um email para: ${aluno.email}, Deseja algo mais? \n\nDigite "Opções" para menu ou "Sair" caso deseje finalizar o atendimento!`
-        const resultado = await new webHookService().createTextResponse(textResponse, 'tentar_novamente_context', session);
+        const textResponse = `Prezado(a) ${aluno.nome}, \nConforme solicitado foi enviado uma declaração para o email ${aluno.email}. \n\n Para solicitar outro serviço digite "Solicitar" ou "Sair" caso deseje finalizar o atendimento!`
+        const resultado = await new webHookService().createTextResponse(textResponse, 'matricula_encontrada_context', session);
         await new secretariaService().enviarDocumentoPorTipo(aluno, tipoAtendimento.DECLARACAO)
         res.send(resultado);
       }
