@@ -42,7 +42,7 @@ class DocumentoService {
                 <div style="text-align: center; margin-bottom: 50px;">
                         <p style="font-size: 11px;"><b>Esta mensagem foi enviada a partir do atendimento virtual do AgileBot </b></p><br>
                 </div>
-                <div style="text-align: left; margin-bottom: 90px;">
+                <div style="text-align: left; margin-bottom: 50px;">
                         <p>Olá <b>${aluno.nome}</b>!<br></p>
                         <p> Em anexo se encontra o documento solicitado de <b>Declaração</b> no atendimento virtual.<br><br>
                                 O Unidesc Centro Universitário agradece o seu contato!
