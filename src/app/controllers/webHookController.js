@@ -40,15 +40,13 @@ class WebHookController {
        const pdf = await new gerarPdfService().gerarPdfByTipo(aluno,tipoAtendimento.DECLARACAO)
       }
     } else if(intent == 'confirma_declaracao'){
-      console.log("intent ->", intent)
       if(aluno){
         console.log('aluno', aluno)
         const textResponse = `Prezado(a) ${aluno.nome}, \nConforme solicitado foi enviado uma declaração para o email ${aluno.email}. \n\n Para solicitar outro serviço digite "Solicitar" ou "Sair" caso deseje finalizar o atendimento!`
         const assunto = `Declaração - ${aluno.nome}`
         const conteudo = await new documentoService().conteudoEmailDeclaracao(aluno)
-        const email = await new emailService().send(conteudo, assunto, aluno, pathAtendimento.PATH_DECLARACAO);
+        await new emailService().send(conteudo, assunto, aluno, pathAtendimento.PATH_DECLARACAO);
         const resultado = await new webHookService().createTextResponse(textResponse, 'valida_matricula_context', session);
-        console.log('email enviado para ->', email)
         res.send(resultado);
       }
     }
