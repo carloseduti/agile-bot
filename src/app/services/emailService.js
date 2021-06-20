@@ -18,10 +18,6 @@ const transporter = nodemailer.createTransport({
 
 class EmailService {
     async send(conteudo, assunto, aluno , path) {
-        console.log('conteudo',conteudo)
-        console.log('assunto',assunto)
-        console.log('aluno',aluno)
-        console.log('path', path)
         const mailSent = await transporter.sendMail({
             subject: assunto,
             from: `AgileBot <agiletelegram@gmail.com>`,
