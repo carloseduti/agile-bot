@@ -36,7 +36,7 @@ class DocumentoService {
         const conteudo = ` 
             <div style="margin: 0 auto; width: 90%;">
                 <div style="text-align: center; background-color: rgb(1, 120, 218); color: rgb(250, 250, 250); height: 70px; line-height: 60px; border-radius: 5px">
-                        <h1 style="text-shadow: rgb(32, 32, 32) 0.1em 0.1em 0.2em"> Atendimento Acadêmico Unidesc </h1>
+                        <h1 style="font-size: 20px; text-shadow: rgb(32, 32, 32) 0.1em 0.1em 0.2em"> Atendimento Acadêmico Unidesc </h1>
                         
                 </div>
                 <div style="font-size: 12px; text-align: center; margin-bottom: 50px;">
