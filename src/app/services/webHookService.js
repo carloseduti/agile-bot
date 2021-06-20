@@ -5,7 +5,7 @@ class WebHookService {
       outputContexts: [
         {
           name: `${session}/contexts/${context}`,
-          lifespanCount: 1,
+          lifespanCount: 2,
         }
       ]
     };
