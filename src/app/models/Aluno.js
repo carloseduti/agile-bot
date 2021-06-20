@@ -14,4 +14,5 @@ const AlunoSchema = new Schema({
 
 });
 
+
 module.exports = moongose.model('Aluno', AlunoSchema)
