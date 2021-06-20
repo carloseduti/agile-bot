@@ -41,7 +41,7 @@ class WebHookController {
       }
     } else if(intent == 'confirma_declaracao'){
       if(aluno){
-        const textResponse = `Feito, ${aluno.nome}. \nEnviei para o e-mail: ${aluno.email}. \n\n Para solicitar outro serviço digite "Solicitar" ou "Sair" caso deseje finalizar o atendimento!`
+        const textResponse = `Feito, ${aluno.nome}. \nEnviei para o e-mail: ${aluno.email}. \n\nPara solicitar outro serviço digite "Solicitar" ou "Sair" caso deseje finalizar o atendimento!`
         const assunto = `Declaração - ${aluno.nome}`
         const conteudo = await new documentoService().conteudoEmailDeclaracao(aluno)
         await new emailService().send(conteudo, assunto, aluno, pathAtendimento.PATH_DECLARACAO);
