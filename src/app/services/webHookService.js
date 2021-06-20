@@ -1,11 +1,11 @@
 class WebHookService {
-  async createTextResponse(textResponse, context,  session) {
+  async createTextResponse(textResponse, context, lifespan, session) {
     const response = {
       fulfillmentText: textResponse,
       outputContexts: [
         {
           name: `${session}/contexts/${context}`,
-          lifespanCount: 2,
+          lifespanCount: lifespan,
         }
       ]
     };
