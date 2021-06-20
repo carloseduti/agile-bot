@@ -22,7 +22,7 @@ class WebHookController {
         res.send(resultado);
       } else {
         const textResponse = 'Infelizmente não encontrei a matricula informada em nosso sistema. \nPor favor, escolha uma das opções:\n\n 1 - Tentar novamente \n 2 - Finalizar atendimento';
-        const resultado = await new webHookService().createTextResponse(textResponse, 'tentar_novamente_context', 1, session);
+        const resultado = await new webHookService().createTextResponse(textResponse, 'tentar_novamente_context', 2, session);
         res.send(resultado);
       }
     } else if (intent == 'tentar_novamente') {
@@ -32,7 +32,7 @@ class WebHookController {
         res.send(resultado);
       } else {
         const textResponse = 'Infelizmente não consegui encontrar essa matrícula em nosso sistema, caso não a tenha em mãos ou esteja com algum outro problema, você pode entrar em contato com a Central de Atendimento ao Aluno através do telefone: (61) 3878-3100. \n\nPara continuar, escolha uma das opções: \n\n 1 - Tentar novamente \n 2 - Finalizar atendimento';
-        const resultado = await new webHookService().createTextResponse(textResponse, 'tentar_novamente_context', 1, session);
+        const resultado = await new webHookService().createTextResponse(textResponse, 'tentar_novamente_context', 2, session);
         res.send(resultado);
       }
     } else if (intent == 'declaracao') {
